@@ -1,0 +1,67 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div.container
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        a.navbar-brand(href='/') FCC 投票系统
+        button(type='button' class='navbar-toggler' data-toggle='collapse' date-target="#mainNav" aria-controls="#mainNav" aria-expanded='false' aria-label='打开菜单')
+          span.navbar-toggler-icon
+        div.collapse.navbar-collapse#mainNav
+          ul.nav.justify-content-end.nav-pills
+            li.nav-item
+              if user
+                if title=='FCC 投票系统'
+                  a.nav-link.active(href='/') 首页  
+                else
+                  a.nav-link(href='/') 首页
+              else
+                a.nav-link(href='/') 首页
+            if user
+              li.nav-item
+                if title=='我的投票'
+                  a.nav-link.active(href='/vote') 我的投票
+                else
+                  a.nav-link(href='/vote') 我的投票
+              li.nav-item
+                if title=='发起投票'
+                  a.nav-link.active(href='/vote/new') 发起投票
+                else
+                  a.nav-link(href='/vote/new') 发起投票
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle#navbarDropdown(role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' href="#") #{user.displayName}
+                div.dropdown-menu(aria-labelledby='navbarDropdown')
+                  a.dropdown-item(href='/logout') 退出登录
+            else
+              li.nav-item
+                a.nav-link.active(href='/auth/twitter') 使用Twitter 登录
+      if message && message.length
+        br
+        div(class='alert alert-info' role='alert')=message
+          button.close(type='button' data-dismiss='alert' aria-label='关闭')
+            span(aria-hidden='true') &times;
+        br
+    block content
+    footer
+      div.container
+        p 
+        |  这个页面由 freecodecamp.cn 的 
+        a(href='https://freecodecamp.cn/ZhichengChen') @ZhichengChen
+        |  创建，
+        p
+        |  按照 
+        a(href='https://freecodecamp.cn/challenges/build-a-voting-app') Build a Voting App 
+        |  的视频和例子。
+        p
+        |  Github repository: 
+        a(href='https://github.com/ZhichengChen/freecodecamp-voting') ZhichengChen/freecodecamp-voting
+        
+    block scripts
+      script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')
+      script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js')
+      script(src='/javascripts/Chart.bundle.min.js')
+      script(src='/javascripts/index.js')

@@ -1,0 +1,13 @@
+extends layout
+  
+block content
+  div.container
+    h1= title
+    form(method='post')
+      div.form-group
+        label(for='title') 标题
+        input.form-control#title(type='text' name='title')
+      div.form-group
+        label(for='options') 选项（换行分隔）
+        textarea.form-control#options(rows='3' name='options')
+      button.btn.btn-primary(type='submit') 提交

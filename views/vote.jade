@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div.container
+    h1= title
+    p 点击来投票或者查看投票结果，
+      a(href="/vote/new") 或者发起新投票
+    ul.list-group
+    each poll in polls
+      a(href='/vote/#{poll.id}')
+        li.list-group-item= poll.title

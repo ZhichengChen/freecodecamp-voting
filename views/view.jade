@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  div.container
+    h1= title
+    p 点击来投票或者查看投票结果，
+      a(href='/vote/new') 或者发起新投票
+    div.row
+      div.col-sm
+        form(method='post')
+          div.form-group
+            label(for='poll') 我要投票给
+            select.form-control#poll(name='poll')
+              each option in poll.options
+                option(value='#{option}')= option
+          button.btn.btn-primary.btn-block(type="submit") 投票
+        br  
+        a.btn.btn-secondary.btn-block#share(href="https://twitter.com/intent/tweet?url=") 分享到TWITTER
+      div.col-sm
+        canvas#polls(labels='#{poll.options}' label='#{poll.title}' data='#{poll.votes}')
+        br
+        if user && user.username == poll.username
+          a.btn.btn-danger.btn-block(href="/delete/#{poll.id}") 删除该投票
